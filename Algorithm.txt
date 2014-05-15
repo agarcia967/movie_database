@@ -1,0 +1,66 @@
+Final Project Algorithm
+
+Problem Statement:
+Create a program that can manage a database of movies for the user from file. Use multiple classes for the three different kinds of movies (polymorphism).
+
+Overall Plan:
+Using polymorphism, create three Movie, DVD (is-a Movie), DVDPack (is-a Movie), VHS (is-a Movie) based on the UMLs below.
+Define a new enum called Rating, whose values will be: NR, G, PG, PG_13, R, and UR.
+
+Movie abstract
+- title : string
+- year : int
+- rating : Rating
+- format : char
+- pure virtual setSortTitle() : void
++ Movie(string, int, int)
++ setTitle(string) : void
++ setYear(int) : void
++ setRating(Rating) : void
++ setRating(int) : void
++ getTitle() : string
++ getYear() : string
++ getRating() : string
++ virtual matchKey(string) : bool
++ virtual toString() : string
+
+DVDPack : Movie
+- numMovies : int
+- movies : Movie[]
++ DVDPack(string,int,int)
++ addMovies() : void
++ virtual matchKey(string) : bool
++ virtual toString() : string
+
+VHS : Movie
+No new member variables. 
+- virtual setSortTitle : void
++ VHS(string, int, int)
++ virtual matchKey(string) : bool
++ virtual toString() : string
+
+DVD : Movie
+No new member variables. 
+- virtual setSortTitle : void
++ DVD(string, int, int)
++ virtual matchKey(string) : bool
++ virtual toString() : string
+
+
+Searching all listings for Titles will utilize the <cstring> function strstr().
+DVDPack’s find() function will search all inner titles
+A main function (Tester) will have a menu oriented program to work with the database.
+Functions of this main will include: “Search database”, “Show a list”, “Add a movie”, “Edit a movie”, “Delete a movie”, “Load a database”, “Save current database”, and “Import from CSV”.
+Adding a movie:
+“Enter the title of the DVD Pack (the pack will be sorted by this title): ”
+The database will be saved and loaded from a binary file using:
+fstream outFile(filename, ios::binary | ios::out);
+outfile.write(reinterpret_cast<char *>(&vector), sizeof(vector))
+
+Classes Needed:
+<iostream> for standard input and output
+<iomanip> for console data manipulation
+<string> for entry listing titles
+<cstring> for strstr() for title search
+<vector> for storing a list of Movie objects
+<fstream> for file input/output
